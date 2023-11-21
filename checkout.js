@@ -47,9 +47,26 @@ function addCartToHTML(){
     document.querySelector('.buttonCheckout').addEventListener('click', function() {
 
         document.cookie = 'listCart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        
-
-        location.reload();
+    
+        Swal.fire({
+            title: '¡Compra exitosa!',
+            text: 'Gracias por su compra',
+            icon: 'success',
+            confirmButtonText: 'Cerrar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                listCart = [];
+                addCartToHTML();
+    
+                document.getElementById('name').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('address').value = '';
+                document.getElementById('country').value = '';
+                document.getElementById('city').value = '';
+    
+                window.location.href = 'index.html';
+            }
+        });
     });
     
 }

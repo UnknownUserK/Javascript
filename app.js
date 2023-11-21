@@ -73,14 +73,26 @@ function addCart($idProduct){
         listCart[$idProduct] = productsCopy.filter(product => product.id == $idProduct)[0];
         listCart[$idProduct].quantity = 1;
     }else{
-
-        //aumentar cantidad
+        
         listCart[$idProduct].quantity++;
     }
     document.cookie = "listCart=" + JSON.stringify(listCart) + "; expires=Thu, 31 Dec 2025 23:59:59 UTC; path=/;";
 
+    // Codigo del sweetalert que casi que no me sale XD
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Producto añadido al carrito',
+        showConfirmButton: false,
+        timer: 1500
+    })
+
     addCartToHTML();
 }
+
+
+    addCartToHTML();
+
 addCartToHTML();
 function addCartToHTML(){
    
@@ -121,7 +133,7 @@ function changeQuantity($idProduct, $type){
         case '-':
             listCart[$idProduct].quantity--;
 
-            // remover del carrito si no hay producto
+            // remover del carrito si no hay producto >:(
             if(listCart[$idProduct].quantity <= 0){
                 delete listCart[$idProduct];
             }
